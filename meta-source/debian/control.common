@@ -9,7 +9,7 @@ Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-precise-meta.git lts-b
 Package: linux-tools-lts-saucy
 Architecture: i386 amd64
 Section: kernel
-Depends: ${misc:Depends}, linux-tools-${kernel-abi-version} [i386 amd64]
+Depends: ${misc:Depends}, linux-tools-${kernel-abi-version}-generic [i386 amd64]
 Description: Linux kernel versioned Tools
  This package will always depend on the latest Linux kernel versioned tools
  available. The Ubuntu patches have been applied.
