@@ -208,6 +208,8 @@ class Package():
         s.package_version_building   = 1
         s.package_version_in_archive = 2
 
+        s.ignore_promotions = False
+
     # distro_series
     #
     @property
@@ -440,29 +442,30 @@ class Package():
                         changes['upload-to-ppa']['status'] = 'New'
 
         # Set promotion bug tasks
-        if promoted_to_security:
-            if changes is None:
-                changes = {}
-            changes['promote-to-security'] = {}
-            if pkg_security:
-                changes['promote-to-security']['assignee'] = pkg_security.creator
-            changes['promote-to-security']['status'] = 'Fix Released'
+        if not s.ignore_promotions:
+            if promoted_to_security:
+                if changes is None:
+                    changes = {}
+                changes['promote-to-security'] = {}
+                if pkg_security:
+                    changes['promote-to-security']['assignee'] = pkg_security.creator
+                changes['promote-to-security']['status'] = 'Fix Released'
 
-        if promoted_to_updates:
-            if changes is None:
-                changes = {}
-            changes['promote-to-updates'] = {}
-            if pkg_updates:
-                changes['promote-to-updates']['assignee'] = pkg_updates.creator
-            changes['promote-to-updates']['status'] = 'Fix Released'
+            if promoted_to_updates:
+                if changes is None:
+                    changes = {}
+                changes['promote-to-updates'] = {}
+                if pkg_updates:
+                    changes['promote-to-updates']['assignee'] = pkg_updates.creator
+                changes['promote-to-updates']['status'] = 'Fix Released'
 
-        if promoted_to_release:
-            if changes is None:
-                changes = {}
-            changes['promote-to-release'] = {}
-            if pkg_release:
-                changes['promote-to-release']['assignee'] = pkg_release.creator
-            changes['promote-to-release']['status'] = 'Fix Released'
+            if promoted_to_release:
+                if changes is None:
+                    changes = {}
+                changes['promote-to-release'] = {}
+                if pkg_release:
+                    changes['promote-to-release']['assignee'] = pkg_release.creator
+                changes['promote-to-release']['status'] = 'Fix Released'
 
         if changes is not None:
             cdebug('')
@@ -490,6 +493,7 @@ class Package():
         else:
             if s.bug.tasks_by_name['promote-to-release'].status == 'Fix Released':
                 retval = True
+
         return retval
 
     # is_prepd
