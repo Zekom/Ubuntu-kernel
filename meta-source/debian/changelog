@@ -1,3 +1,9 @@
+linux-meta-lts-quantal (3.5.0.42.48) precise; urgency=low
+
+  * Ubuntu-lts-3.5.0-42.65
+
+ -- Steve Conklin <sconklin@canonical.com>  Wed, 02 Oct 2013 15:53:42 -0500
+
 linux-meta-lts-quantal (3.5.0.41.47) precise; urgency=low
 
   * Ubuntu-lts-3.5.0-41.62
