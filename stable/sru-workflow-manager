@@ -720,6 +720,7 @@ class Shank(StdApp):
         to the right component in the given pocket.
         """
         cdebug('                check_component_in_pocket enter')
+        cdebug('                    tstamp_prop: ' + tstamp_prop)
         bug = taskobj.bug
 
         # Set promote-to-proposed timestamp first, used for checking below
