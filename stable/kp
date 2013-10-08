@@ -8,17 +8,33 @@ import json
 
 from lpltk.LaunchpadService             import LaunchpadService
 from ktl.ubuntu                         import Ubuntu
+from ktl.termcolor                      import colored
 
 from sb.exceptions                      import GeneralError
 from sb.log                             import Clog, cinfo, cdebug, cerror, cwarn
 
 def dump(d, indent=0):
     for key, value in d.iteritems():
-       cinfo( ' ' * (indent * 4) + str(key))
-       if isinstance(value, dict):
-           dump(value, indent+1)
-       else:
-           cinfo( ' ' * ((indent+1) * 4) + str(value))
+        cinfo( ' ' * (indent * 4) + str(key))
+        if isinstance(value, dict):
+            dump(value, indent+1)
+        else:
+            if isinstance(value, PkgBuildStatus):
+                c = 'white'
+                if value.built:
+                    c = 'green'
+                s = colored('built', c) + '; '
+                c = 'white'
+                if value.building:
+                    c = 'yellow'
+                s += colored('building', c) + '; '
+                c = 'white'
+                if value.missing:
+                    c = 'red'
+                s += colored('missing', c)
+                cinfo( ' ' * ((indent+1) * 4) + s)
+            else:
+                cinfo( ' ' * ((indent+1) * 4) + str(value))
 
 class KVersion():
     def __init__(s, txt):
@@ -113,6 +129,18 @@ class KPacs():
 
         cdebug('KPac::__init__ leave')
 
+    def is_in_pocket(s, pocket):
+        retval = True
+
+        # Check to see if all the dependencies have been built and are in the
+        # proposed pocket.
+        #
+        for dep in s.status:
+            if not s.status[dep]['status'][pocket].built:
+                retval = False
+
+        return retval
+
     # dependent_packages
     #
     @property
@@ -188,7 +216,7 @@ class KPacs():
 
             abi_num = None
             pkg_rel = s.version.full
-            if dep in [ 'lbm', 'meta' ] and s.version.abi:
+            if dep in [ 'lbm', 'meta', 'ports-meta' ] and s.version.abi:
                 abi_num = s.version.abi
                 pkg_rel = s.version.kernel
 
@@ -367,12 +395,18 @@ class TheApp():
             for version in s.kernel_versions:
                 cinfo('%s : %s' % (package, version), 'yellow')
                 p = KPacs(s.lp_production, package, version)
+                for pocket in ['ppa', 'proposed', 'updates', 'security', 'release']:
+                    cinfo('%12s' % pocket + ':' + ' %s' % p.is_in_pocket(pocket))
+                cinfo('')
                 dump(p.status, 1)
                 cinfo('')
 
             version = '3.11.0-11.17'
             cinfo('%s : %s' % (package, version), 'yellow')
             p = KPacs(s.lp_production, package, version)
+            for pocket in ['ppa', 'proposed', 'updates', 'security', 'release']:
+                cinfo('%12s' % pocket + ':' + ' %s' % p.is_in_pocket(pocket))
+            cinfo('')
             dump(p.status, 1)
 
             retval = 0
