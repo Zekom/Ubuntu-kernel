@@ -94,7 +94,7 @@ class Cmdline:
             opts, args = getopt(argv[1:], optsShort, optsLong)
             if len(args) != 1:
                 raise CmdlineError('You must supply an output file name\n\n')
-                
+
             self.cfg['args'] = args
 
             for opt, val in opts:
@@ -144,16 +144,18 @@ class PPAinfo(StdApp):
     def __init__(self, name, ppaname):
         StdApp.__init__(self)
         self.defaults = {}
-        cachedir = "/tmp/.launchpadlib/cache/"
 
         self.name = 'canonical-kernel-team'
         self.ppaname = 'ppa'
         self.person = None
         self.ppa = None
 
+    def initialize(self):
+        cachedir = "/tmp/.launchpadlib/cache/"
+
         self.launchpad = Launchpad.login_anonymously('kernel team tools', 'production', cachedir)
         self.person = self.launchpad.people[self.name]
-        self.ppa = self.person.getPPAByName(name=ppaname)
+        self.ppa = self.person.getPPAByName(name=self.ppaname)
 
     # main
     #
@@ -162,6 +164,67 @@ class PPAinfo(StdApp):
         try:
             self.merge_config_options(self.defaults, cmdline.process(argv, self.defaults))
             cmdline.verify_options(self.cfg)
+
+            self.initialize()
+
+            # by default we want these
+            statuses = ['Pending', 'Published']
+
+            if 'deleted' in self.cfg:
+                print 'Also fetching Deleted packages\n'
+                statuses.append('Deleted')
+            else:
+                print 'Skipping Deleted Packages\n'
+
+            if 'obsolete' in self.cfg:
+                print 'Also fetching Obsolete packages\n'
+                statuses.append('Obsolete')
+            else:
+                print 'Skipping Obsolete Packages\n'
+
+            if 'superseded' in self.cfg:
+                print 'Also fetching Superseded packages\n'
+                statuses.append('Superseded')
+            else:
+                print 'Skipping Superseded Packages\n'
+
+            if 'allinfo' in self.cfg:
+                print 'Including all package information in json output\n'
+
+            jf = open(self.cfg['args'][0], 'w+')
+
+            outdict = {}
+
+            archive = self.ppa
+            for astatus in statuses:
+                psrc = archive.getPublishedSources(status=astatus)
+                for p in  psrc:
+                    print '\n', p.display_name, ':', p.status,
+                    #print p.self_link
+                    fd = urlopen(p.self_link)
+                    sourceinfo = json.load(fd)
+
+                    # Add some plain text fields for some info
+                    sourceinfo['creator'] = sourceinfo['package_creator_link'].split('/')[-1].strip('~') 
+                    sourceinfo['signer'] = sourceinfo['package_signer_link'].split('/')[-1].strip('~') 
+                    #version =  sourceinfo['source_package_version'].split('-')[0]
+                    rm = re.match('[0-9]\.[0-9]\.[0-9][0-9]', sourceinfo['source_package_version'])
+                    version = rm.group(0)
+                    print '\nVersion', version
+                    ubuntu = Ubuntu()
+                    rec = ubuntu.lookup(version)
+                    sourceinfo['distribution'] = rec['name']
+
+                    # And strip some things we don't care about
+                    if not 'allinfo' in self.cfg:
+                        for delkey in ['archive_link', 'distro_series_link', 'http_etag', 'package_maintainer_link', \
+                                           'resource_type_link', 'package_creator_link', 'package_signer_link', \
+                                           'section_name', 'scheduled_deletion_date', 'removal_comment', 'removed_by_link']:
+                            del sourceinfo[delkey]
+
+                    key = p.source_package_name + '-' + p.source_package_version
+                    outdict[key] = sourceinfo
+            jf.write(json.dumps(outdict, sort_keys=True, indent=4))
 
         # Handle the user presses <ctrl-C>.
         #
@@ -174,64 +237,6 @@ class PPAinfo(StdApp):
             cmdline.error(e.msg, self.defaults)
             return
 
-        # by default we want these
-        statuses = ['Pending', 'Published']
-
-        if 'deleted' in self.cfg:
-            print 'Also fetching Deleted packages\n'
-            statuses.append('Deleted')
-        else:
-            print 'Skipping Deleted Packages\n'
-
-        if 'obsolete' in self.cfg:
-            print 'Also fetching Obsolete packages\n'
-            statuses.append('Obsolete')
-        else:
-            print 'Skipping Obsolete Packages\n'
-
-        if 'superseded' in self.cfg:
-            print 'Also fetching Superseded packages\n'
-            statuses.append('Superseded')
-        else:
-            print 'Skipping Superseded Packages\n'
-
-        if 'allinfo' in self.cfg:
-            print 'Including all package information in json output\n'
-
-        jf = open(self.cfg['args'][0], 'w+')
-
-        outdict = {}
-
-        archive = self.ppa
-        for astatus in statuses:
-            psrc = archive.getPublishedSources(status=astatus)
-            for p in  psrc:
-                print '\n', p.display_name, ':', p.status,
-                #print p.self_link
-                fd = urlopen(p.self_link)
-                sourceinfo = json.load(fd)
-
-                # Add some plain text fields for some info
-                sourceinfo['creator'] = sourceinfo['package_creator_link'].split('/')[-1].strip('~') 
-                sourceinfo['signer'] = sourceinfo['package_signer_link'].split('/')[-1].strip('~') 
-                #version =  sourceinfo['source_package_version'].split('-')[0]
-                rm = re.match('[0-9]\.[0-9]\.[0-9][0-9]', sourceinfo['source_package_version'])
-                version = rm.group(0)
-                print '\nVersion', version
-                ubuntu = Ubuntu()
-                rec = ubuntu.lookup(version)
-                sourceinfo['distribution'] = rec['name']
-
-                # And strip some things we don't care about
-                if not 'allinfo' in self.cfg:
-                    for delkey in ['archive_link', 'distro_series_link', 'http_etag', 'package_maintainer_link', \
-                                       'resource_type_link', 'package_creator_link', 'package_signer_link', \
-                                       'section_name', 'scheduled_deletion_date', 'removal_comment', 'removed_by_link']:
-                        del sourceinfo[delkey]
-   
-                key = p.source_package_name + '-' + p.source_package_version
-                outdict[key] = sourceinfo
-        jf.write(json.dumps(outdict, sort_keys=True, indent=4))
         return
 
 if __name__ == '__main__':
