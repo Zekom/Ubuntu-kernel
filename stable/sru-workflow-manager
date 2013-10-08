@@ -899,7 +899,7 @@ class Shank(StdApp):
 
         # Update remaining time stamps and status, send announcement
         s.set_tagged_timestamp(taskobj, 'kernel-stable-Verification-testing-start')
-        s.set_phase(taskobj, 'Verification')
+        s.set_phase(taskobj, 'Verification & Testing')
         s.set_task_to_state('verification-testing', 'In Progress')
         s.set_testing_to_confirmed(taskobj)
         s.send_upload_announcement(taskobj, 'proposed')
@@ -909,6 +909,19 @@ class Shank(StdApp):
         #
         cinfo('The SRU bugs are ready to be tagged and spammed.')
         return False
+
+    def set_testing_to_confirmed(s, taskobj):
+        cdebug('            set_testing_to_confirmed enter')
+        if s.wfb.tasks_by_name['certification-testing'].status == 'New':
+            s.set_task_to_state('certification-testing', 'Confirmed')
+            s.set_tagged_timestamp(taskobj, 'kernel-stable-Certification-testing-start')
+        if s.wfb.tasks_by_name['regression-testing'].status == 'New':
+            s.set_task_to_state('regression-testing', 'Confirmed')
+            s.set_tagged_timestamp(taskobj, 'kernel-stable-Regression-testing-start')
+        if s.wfb.tasks_by_name['security-signoff'].status == 'New':
+            s.set_task_to_state('security-signoff', 'Confirmed')
+            s.set_tagged_timestamp(taskobj, 'kernel-stable-Security-signoff-start')
+        cdebug('            set_testing_to_confirmed leave')
 
     def verification_testing_fix_released(s, taskobj):
         """
@@ -927,6 +940,7 @@ class Shank(StdApp):
             s.set_phase(taskobj, 'Testing')
 
         s.set_testing_to_confirmed(taskobj)
+        cdebug('            verification_testing_fix_released leave (False)')
         return False
 
     def certification_testing_fix_released(s, taskobj):
@@ -956,7 +970,7 @@ class Shank(StdApp):
             cdebug('            certification_testing_fix_released leave (True)')
             return True
         else:
-            cwarn('                certification-testing task set to Fix Released but no status tag!')
+            cwarn('                certification-testing task set to Fix Released but no status tag (certification-testing-[passed|failed])!')
             # Send email and possibly a status update -spc- TODO
             msgbody = 'The certification-testing task was set to Fix Released but neither the certification-testing-passed or certification-testing-failed tag was applied\n'
             s.send_comment(taskobj, 'Certification completed but no status tags applied', msgbody)
@@ -1012,7 +1026,7 @@ class Shank(StdApp):
             cdebug('            regression_testing_fix_released leave (True)')
             return True
         else:
-            cwarn('                regression-testing task set to Fix Released but no status tag!')
+            cwarn('                regression-testing task set to Fix Released but no status tag (qa-testing-[passed|failed])!')
             # Send email and possibly a status update -spc- TODO
             msgbody = 'The regression-testing task was set to Fix Released but neither the qa-testing-passed or qa-testing-failed tag was applied\n'
             s.send_comment(taskobj, 'Regression Testing completed but no status tags applied', msgbody)
