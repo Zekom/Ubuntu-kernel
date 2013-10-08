@@ -199,7 +199,7 @@ class Package():
 
         s.pkgs = s.dependent_packages
 
-        if shankbug.targeted_project == 'kernel-sru-workflow':
+        if s.bug.targeted_project == 'kernel-sru-workflow':
             s.is_stable_package = True
         else:
             s.is_stable_package = False
@@ -243,6 +243,7 @@ class Package():
         guess this by looking if there is already a package with same
         abi in the updates/release pocket.
         '''
+        cdebug('package::is_new_abi enter')
         if s.__is_new_abi is None:
             s.__is_new_abi = True
             if s.package.kernel and s.package.abi:
@@ -251,6 +252,7 @@ class Package():
                 if st_abi_rel == 2 or st_abi_upd == 2:
                     s.__is_new_abi = False
 
+        cdebug('package::is_new_abi leave (%s)' % s.__is_new_abi)
         return s.__is_new_abi
 
     # dependent_packages
