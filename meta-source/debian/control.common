@@ -7,9 +7,17 @@ Build-Depends: dpkg (>= 1.13.19), debhelper (>= 5), gawk
 Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-precise-meta.git lts-backport-saucy
 
 Package: linux-tools-lts-saucy
-Architecture: i386 amd64
+Architecture: i386 amd64 armhf
 Section: kernel
-Depends: ${misc:Depends}, linux-tools-${kernel-abi-version}-generic [i386 amd64]
+Depends: ${misc:Depends}, linux-tools-${kernel-abi-version}-generic-lts-saucy
+Description: Linux kernel versioned Tools
+ This package will always depend on the latest Linux kernel versioned tools
+ available. The Ubuntu patches have been applied.
+
+Package: linux-tools-lts-saucy-generic-lpae
+Architecture: armhf
+Section: kernel
+Depends: ${misc:Depends}, linux-tools-${kernel-abi-version}-generic-lpae-lts-saucy
 Description: Linux kernel versioned Tools
  This package will always depend on the latest Linux kernel versioned tools
  available. The Ubuntu patches have been applied.
