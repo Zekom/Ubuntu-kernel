@@ -1,3 +1,13 @@
+linux-meta-lts-saucy (3.11.0.12.11) precise; urgency=low
+
+ [ Andy Whitcroft ]
+  * fix up armhf generic-lpae to match standard pattern
+
+ [ Tim Gardner ]
+  * Add support for armhf generic-lpae
+
+ -- Andy Whitcroft <apw@canonical.com>  Tue, 15 Oct 2013 14:23:33 +0100
+
 linux-meta-lts-saucy (3.11.0.12.10) precise; urgency=low
 
   * Ubuntu-lts-3.11.0-12
