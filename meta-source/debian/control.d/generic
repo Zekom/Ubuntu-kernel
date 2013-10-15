@@ -4,7 +4,7 @@ Section: devel
 Priority: optional
 Depends: ${misc:Depends}, linux-headers-${kernel-abi-version}-generic
 Description: Generic Linux kernel headers
- This package will always depend on the latest generic 12.10 kernel headers
+ This package will always depend on the latest generic 13.10 kernel headers
  available.
 
 Package: linux-image-generic-lts-saucy
@@ -13,7 +13,17 @@ Section: metapackages
 Priority: optional
 Depends: ${misc:Depends}, linux-image-${kernel-abi-version}-generic, linux-firmware
 Description: Generic Linux kernel image
- This package will always depend on the latest generic 12.10 kernel image
+ This package will always depend on the latest generic 13.10 kernel image
+ available.
+
+Package: linux-tools-generic-lts-saucy
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional
+Provides: linux-tools
+Depends: ${misc:Depends}, linux-tools-${kernel-abi-version}-generic
+Description: Generic Linux kernel tools
+ This package will always depend on the latest generic 13.10 kernel tools
  available.
 
 Package: linux-generic-lts-saucy
@@ -22,7 +32,7 @@ Section: metapackages
 Priority: optional
 Depends: ${misc:Depends}, linux-image-generic-lts-saucy, linux-headers-generic-lts-saucy
 Description: Generic Linux kernel image and headers
- This package will always depend on the latest generic 12.10 kernel image
+ This package will always depend on the latest generic 13.10 kernel image
  and headers packages available.
 
 # Update this meta package to depend on the 14.04 LTS kernel when Saucy goes EOL.

@@ -4,7 +4,7 @@ Section: kernel
 Priority: optional
 Depends: ${misc:Depends}, linux-headers-${kernel-abi-version}-generic-lpae-lts-saucy
 Description: Generic Linux kernel headers
- This package will always depend on the latest generic-lpae kernel headers
+ This package will always depend on the latest generic-lpae 13.10 kernel headers
  available.
 
 Package: linux-image-generic-lpae-lts-saucy
@@ -13,7 +13,17 @@ Section: kernel
 Priority: optional
 Depends: ${misc:Depends}, linux-image-${kernel-abi-version}-generic-lpae-lts-saucy, linux-firmware
 Description: Generic Linux kernel image
- This package will always depend on the latest generic-lpae kernel image
+ This package will always depend on the latest generic-lpae 13.10 kernel image
+ available.
+
+Package: linux-tools-generic-lpae-lts-saucy
+Architecture: armhf
+Section: metapackages
+Priority: optional
+Provides: linux-tools
+Depends: ${misc:Depends}, linux-tools-${kernel-abi-version}-generic-lpae
+Description: Generic Linux kernel tools
+ This package will always depend on the latest generic-lpae 13.10 kernel tools
  available.
 
 Package: linux-generic-lpae-lts-saucy
@@ -22,6 +32,18 @@ Section: kernel
 Priority: optional
 Depends: ${misc:Depends}, linux-image-generic-lpae-lts-saucy (= ${binary:Version}), linux-headers-generic-lpae-lts-saucy (= ${binary:Version})
 Description: Complete Generic Linux kernel and headers
- This package will always depend on the latest complete generic-lpae Linux kernel
+ This package will always depend on the latest complete generic-lpae 13.10 Linux kernel
  and headers.
+
+# Update this meta package to depend on the 14.04 LTS kernel when Saucy goes EOL.
+
+Package: linux-generic-lpae-lts-saucy-eol-upgrade
+Architecture: armhf
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-generic-lpae-lts-saucy
+Description: Complete Generic Linux kernel and headers
+ This package will always depend on the latest 13.10 generic Linux kernel
+ and headers, or 14.04 when 13.10 is end of life. Refer to this page for details:
+ https://wiki.ubuntu.com/Kernel/LTSEnablementStack
 
