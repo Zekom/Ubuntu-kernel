@@ -1,3 +1,11 @@
+linux-meta (2.6.32.53.60) lucid; urgency=low
+
+  [ Steve Conklin ]
+
+  * Bump ABI
+
+ -- Steve Conklin <sconklin@canonical.com>  Mon, 21 Oct 2013 13:51:11 -0500
+
 linux-meta (2.6.32.52.59) lucid; urgency=low
 
   [ Brad Figg ]
