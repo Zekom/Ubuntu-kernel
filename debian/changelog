@@ -1,3 +1,13 @@
+linux-signed (3.5.0-43.67) UNRELEASED; urgency=low
+
+  [ Andy Whitcroft ]
+
+  * Fix the version number constraint between linux and linux-signed to be
+    '=' to ensure we cannot migrate linux without linux-signed being in
+    lock step.  (LP: #1201444)
+
+ -- Andy Whitcroft <apw@canonical.com>  Wed, 23 Oct 2013 08:55:19 +0100
+
 linux-signed (3.5.0-43.66) quantal; urgency=low
 
   * Version 3.5.0-43.66
