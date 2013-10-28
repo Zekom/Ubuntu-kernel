@@ -1,6 +1,6 @@
 ubuntu-kernel-tests (0.0.14-1) unstable; urgency=low
 
- * Start new release
+ [kernel-test-expander] Added libdbus-1-dev to the list of dependencies for apparmor
 
  -- Brad Figg <brad.figg@canonical.com>  Mon, 28 Oct 2013 11:37:48 -0700
 
