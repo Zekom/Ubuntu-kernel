@@ -18,6 +18,7 @@ printenv:
 
 COMPAT_KDIR=/lib/modules/$(release)-$(abinum)-$(target_flavour)
 NET_BUILD_KERNEL=$(release)-$(abinum)-$(target_flavour)
+make_cw_defconfig = make defconfig-wifi
 make_compat = make $(conc_level)
 make_compat += KLIB=$(COMPAT_KDIR) KLIB_BUILD=$(COMPAT_KDIR)/build
 make_compat += MADWIFI=
@@ -42,11 +43,13 @@ ifneq ($(CWDIRS),)
 	#
 	for i in $(CWDIRS); do \
 		cw_dir=$(builddir)/build-$*/$$i; \
+		if [ -e $${cw_dir}/compat/scripts/compat_firmware_install ] ; then fw_install_file=compat/scripts/compat_firmware_install; elif [ -e $${cw_dir}/scripts/backport_firmware_install.sh ] ; then fw_install_file=scripts/backport_firmware_install.sh; fi; \
+		if [ -e $${cw_dir}/udev/ubuntu/50-compat_firmware.rules ] ; then fw_rules_file=udev/ubuntu/50-compat_firmware.rules; elif [ -e $${cw_dir}/udev/50-compat_firmware.rules ] ; then fw_rules_file=udev/50-compat_firmware.rules; fi; \
 		sed -i 's/compat_firmware/compat_firmware_'$(abinum)_$(target_flavour)'/g' \
 			$${cw_dir}/compat/compat_firmware_class.c \
-			$${cw_dir}/compat/scripts/compat_firmware_install \
-			$${cw_dir}/udev/ubuntu/50-compat_firmware.rules; \
-		mv -v $${cw_dir}/udev/ubuntu/50-compat_firmware.rules $${cw_dir}/udev/ubuntu/50-compat_firmware_$(abinum)_$(target_flavour).rules; \
+			$${cw_dir}/$${fw_install_file} \
+			$${cw_dir}/$${fw_rules_file}; \
+		mv -v $${cw_dir}/$${fw_rules_file} $${cw_dir}/udev/ubuntu/50-compat_firmware_$(abinum)_$(target_flavour).rules; \
 		mv -v $${cw_dir}/udev/ubuntu/compat_firmware.sh $${cw_dir}/udev/ubuntu/compat_firmware_$(abinum)_$(target_flavour).sh; \
 	done
 endif
@@ -86,6 +89,9 @@ $(stampdir)/stamp-build-%: prepare-%
 	@echo "Building $*..."
 ifneq ($(CWDIRS),)
 	for i in $(CWDIRS); do \
+		for j in $(NEWER_CWDIRS); do \
+			if [ $$i == $$j ]; then cd $(builddir)/build-$*/$$i && $(make_cw_defconfig); fi; \
+		done; \
 		cd $(builddir)/build-$*/$$i && $(make_compat); \
 	done
 endif

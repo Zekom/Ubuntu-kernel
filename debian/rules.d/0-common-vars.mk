@@ -51,15 +51,16 @@ no_compat_wireless_flavours="xen virtual"
 #
 # Explicitly enable compat-wireless at release time.
 #
-do_compat_wireless := 3.3 3.4 3.5 3.6 3.7 3.8
+newer_compat_wireless := 3.10
+do_compat_wireless := 3.3 3.4 3.5 3.6 3.7 3.8 $(newer_compat_wireless)
 do_net=true
 do_hv=true
 
 #
 # Compat wireless versions for which packages are created.
 #
-CWDIRS=$(foreach ver,$(do_compat_wireless), cw-$(ver) )
-
+CWDIRS=$(foreach ver,$(do_compat_wireless),cw-$(ver))
+NEWER_CWDIRS=$(foreach ver,$(newer_compat_wireless),cw-$(ver))
 # Support parallel=<n> in DEB_BUILD_OPTIONS (see #209008)
 COMMA=,
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
