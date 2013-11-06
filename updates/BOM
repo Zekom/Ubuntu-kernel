@@ -7,6 +7,7 @@ cw-3.7: Followed http://linuxwireless.org/en/users/Download/hacking#Generating_s
 cw-3.8: Followed http://linuxwireless.org/en/users/Download/hacking#Generating_stable_releases using v3.8.3
 cw-3.10: https://www.kernel.org/pub/linux/kernel/projects/backports/stable/v3.10.17/backports-3.10.17-2.tar.bz2
 cw-3.11: https://www.kernel.org/pub/linux/kernel/projects/backports/stable/v3.11.6/backports-3.11.6-1.tar.bz2
+cw-3.12: https://www.kernel.org/pub/linux/kernel/projects/backports/stable/v3.12-rc7/backports-3.12-rc7-1.tar.bz2
 
 Remember to remove the .gitignore file lest you not get all of the files committed that you thought.
 
