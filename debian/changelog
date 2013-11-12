@@ -1,4 +1,6 @@
-linux-signed (3.5.0-43.67) UNRELEASED; urgency=low
+linux-signed (3.5.0-44.67) quantal; urgency=low
+
+  * Version 3.5.0-44.67
 
   [ Andy Whitcroft ]
 
@@ -6,7 +8,7 @@ linux-signed (3.5.0-43.67) UNRELEASED; urgency=low
     '=' to ensure we cannot migrate linux without linux-signed being in
     lock step.  (LP: #1201444)
 
- -- Andy Whitcroft <apw@canonical.com>  Wed, 23 Oct 2013 08:55:19 +0100
+ -- Brad Figg <brad.figg@canonical.com>  Tue, 12 Nov 2013 11:15:22 -0800
 
 linux-signed (3.5.0-43.66) quantal; urgency=low
 
