@@ -19,6 +19,7 @@ printenv:
 COMPAT_KDIR=/lib/modules/$(release)-$(abinum)-$(target_flavour)
 NET_BUILD_KERNEL=$(release)-$(abinum)-$(target_flavour)
 make_cw_defconfig = make defconfig-wifi
+make_cw_defconfig += KLIB=$(COMPAT_KDIR) KLIB_BUILD=$(COMPAT_KDIR)/build
 make_compat = make $(conc_level)
 make_compat += KLIB=$(COMPAT_KDIR) KLIB_BUILD=$(COMPAT_KDIR)/build
 make_compat += MADWIFI=
