@@ -1,3 +1,9 @@
+linux-meta-lts-saucy (3.11.0.14.13) precise; urgency=low
+
+  * Ubuntu-lts-3.11.0-14
+
+ -- Steve Conklin <sconklin@canonical.com>  Wed, 13 Nov 2013 13:41:45 -0600
+
 linux-meta-lts-saucy (3.11.0.13.12) precise; urgency=low
 
   * Ubuntu-lts-3.11.0-13
