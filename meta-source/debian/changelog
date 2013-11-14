@@ -1,3 +1,12 @@
+linux-meta (3.2.0.57.68) precise; urgency=low
+
+  * UBUNTU: Add v3.10 compat-wireless meta package
+    UBUNTU: Add v3.11 compat-wireless meta package
+    UBUNTU: Add v3.12 compat-wireless meta package
+    -LP: #1246465
+
+ -- Tim Gardner <tim.gardner@canonical.com>  Thu, 14 Nov 2013 11:31:54 -0700
+
 linux-meta (3.2.0.57.67) precise; urgency=low
 
   [ Steve Conklin ]
