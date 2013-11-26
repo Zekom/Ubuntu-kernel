@@ -1,3 +1,9 @@
+linux-signed (3.12.0-4.12) trusty; urgency=low
+
+  * Version 3.12.0-4.12
+
+ -- Tim Gardner <tim.gardner@canonical.com>  Tue, 26 Nov 2013 22:23:45 +0000
+
 linux-signed (3.12.0-4.11) trusty; urgency=low
 
   * Version 3.12.0-4.11
