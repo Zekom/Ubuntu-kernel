@@ -1,3 +1,11 @@
+linux-meta (3.2.0.58.69) precise; urgency=low
+
+  [ Brad Figg ]
+
+  * Bump ABI
+
+ -- Brad Figg <brad.figg@canonical.com>  Tue, 03 Dec 2013 09:24:15 -0800
+
 linux-meta (3.2.0.57.68) precise; urgency=low
 
   * UBUNTU: Add v3.10 compat-wireless meta package
