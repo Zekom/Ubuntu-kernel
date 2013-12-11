@@ -203,7 +203,7 @@ class Cmdline:
             raise ValueError
         else:
             try:
-                socket.inet_aton(cfg['addr'])
+                socket.inet_aton(socket.gethostbyname(cfg['addr']))
             except socket.error:
                 raise ValueError('Invalid IP address specified')
 
