@@ -20,12 +20,13 @@ class Provisioner():
 
     # __init__
     #
-    def __init__(self, name, series, arch, hwe=False, debs=None, dry_run=False):
+    def __init__(self, name, series, arch, hwe=False, debs=None, ppa=None, dry_run=False):
         self.name   = name
         self.series = series
         self.arch   = arch
         self.hwe    = hwe
         self.debs   = debs
+        self.ppa    = ppa
         self.quiet  = False
         Provisioner.quiet  = False
         self.dry_run= dry_run
@@ -46,6 +47,17 @@ class Provisioner():
 
         ssh(target, '\'echo deb http://us.archive.ubuntu.com/ubuntu/ %s-proposed restricted main multiverse universe | sudo tee -a /etc/apt/sources.list\'' % (series))
 
+    # enable_ppa
+    #
+    def enable_ppa(self, target, series):
+        '''
+        On the target system, enable the -proposed archive pocket for the
+        specified series.
+        '''
+        if not self.quiet:
+            print('    enabling ppa %s' % self.ppa)
+        ssh(target, '\'apt-get install software-properties-common\'')
+        ssh(target, '\'add-apt-repository -y %s\'' % (self.ppa))
 
     # dist_upgrade
     #
@@ -253,6 +265,8 @@ class VirtualProvisioner(Provisioner):
         #
         self.wait_for_system(target, timeout=30) # Allow 30 minutes for network installation
         self.enable_proposed(target, self.series)
+        if self.ppa is not None:
+            self.enable_ppa(target, self.series)
         if self.ubuntu.is_development_series(self.series):
             self.kernel_upgrade(target)
         else:
