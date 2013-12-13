@@ -336,15 +336,29 @@ class LogMeter(StdApp, MetaData):
         if 'out' in self.cfg:
             self.openLog(self.cfg['out'])
 
-        self.meter = Instrument('fluke', '8846A')
-        self.meter.initNet(self.cfg['addr'], self.cfg['port'])
+        connected = False
+        retry = 0
+        while not connected:
+            try:
+                self.meter = Instrument('fluke', '8846A')
+                self.meter.initNet(self.cfg['addr'], self.cfg['port'])
+                mid = self.meter.getIdent()
+                connected = True
+            
+            except socket.error, e:
+                self.writeOutput('Socket Error: %s' % e)
+                retry = retry + 1
+                if retry > 5:
+                    self.writeOutput('Cannot connect to meter, giving up')
+                    return
+
+                sleep(1)
 
         self.writeOutput('START: *****************************************')
         self.writeOutput('START: **            New Log Start            **')
         self.writeOutput('START: *****************************************')
-
-        mid = self.meter.getIdent()
         self.writeOutput('INFO: id = %s' % mid)
+
         md = self.meter.device
         md.setRemoteMode()
 
