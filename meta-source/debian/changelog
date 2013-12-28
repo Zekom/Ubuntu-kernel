@@ -1,3 +1,11 @@
+linux-meta (3.13.0.0.2) trusty; urgency=low
+
+  * Handle -extra split on ppc64el -generic.
+  * Build -virtual metapackages on ppc64el.
+  * Add ppc64el meta packages.
+
+ -- Andy Whitcroft <apw@canonical.com>  Sat, 28 Dec 2013 10:32:09 +0000
+
 linux-meta (3.13.0.0.1) trusty; urgency=low
 
   * linux ABI 3.13.0-0
