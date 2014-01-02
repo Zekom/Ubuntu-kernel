@@ -1,3 +1,9 @@
+linux-signed (3.13.0-0.13) trusty; urgency=low
+
+  * Version 3.13.0-0.13
+
+ -- Andy Whitcroft <apw@canonical.com>  Thu, 02 Jan 2014 12:07:52 +0000
+
 linux-signed (3.13.0-0.11) trusty; urgency=medium
 
   * Version 3.13.0-0.11
