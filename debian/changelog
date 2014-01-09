@@ -1,3 +1,9 @@
+linux-signed (3.11.0-16.27) saucy; urgency=low
+
+  * Version 3.11.0-16.27
+
+ -- Steve Conklin <sconklin@canonical.com>  Thu, 09 Jan 2014 10:14:08 -0600
+
 linux-signed (3.11.0-16.26) saucy; urgency=low
 
   * Version 3.11.0-16.26
