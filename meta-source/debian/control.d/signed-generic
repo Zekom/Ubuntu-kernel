@@ -1,4 +1,4 @@
-Package: linux-signed-image-generic-lts-saucy
+Package: linux-signed-image-generic-lts-trusty
 Architecture: amd64
 Section: metapackages
 Priority: optional
@@ -7,22 +7,22 @@ Description: Signed Generic Linux kernel image
  This package will always depend on the latest generic 13.10 kernel image
  available.  Signed with the Ubuntu EFI key.
 
-Package: linux-signed-generic-lts-saucy
+Package: linux-signed-generic-lts-trusty
 Architecture: amd64
 Section: metapackages
 Priority: optional
-Depends: ${misc:Depends}, linux-signed-image-generic-lts-saucy, linux-headers-generic-lts-saucy
+Depends: ${misc:Depends}, linux-signed-image-generic-lts-trusty, linux-headers-generic-lts-trusty
 Description: Complete Signed Generic Linux kernel and headers
  This package will always depend on the latest complete generic 13.10 Linux kernel
  and headers.  Signed with the Ubuntu EFI key.
 
 # Update this meta package to depend on the 14.04 signed LTS kernel when Saucy goes EOL.
 
-Package: linux-signed-generic-lts-saucy-eol-upgrade
+Package: linux-signed-generic-lts-trusty-eol-upgrade
 Architecture: amd64
 Section: metapackages
 Priority: optional
-Depends: ${misc:Depends}, linux-signed-generic-lts-saucy
+Depends: ${misc:Depends}, linux-signed-generic-lts-trusty
 Description: Complete Signed Generic Linux kernel and headers
  This package will always depend on the latest 13.10 generic Linux kernel
  and headers, or 14.04 when 13.10 is end of life. Refer to this page for details:

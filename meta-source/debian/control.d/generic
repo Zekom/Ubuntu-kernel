@@ -1,4 +1,4 @@
-Package: linux-headers-generic-lts-saucy
+Package: linux-headers-generic-lts-trusty
 Architecture: i386 amd64 armhf
 Section: devel
 Priority: optional
@@ -7,7 +7,7 @@ Description: Generic Linux kernel headers
  This package will always depend on the latest generic 13.10 kernel headers
  available.
 
-Package: linux-image-generic-lts-saucy
+Package: linux-image-generic-lts-trusty
 Architecture: i386 amd64 armhf
 Section: metapackages
 Priority: optional
@@ -16,7 +16,7 @@ Description: Generic Linux kernel image
  This package will always depend on the latest generic 13.10 kernel image
  available.
 
-Package: linux-tools-generic-lts-saucy
+Package: linux-tools-generic-lts-trusty
 Architecture: i386 amd64 armhf
 Section: metapackages
 Priority: optional
@@ -26,22 +26,22 @@ Description: Generic Linux kernel tools
  This package will always depend on the latest generic 13.10 kernel tools
  available.
 
-Package: linux-generic-lts-saucy
+Package: linux-generic-lts-trusty
 Architecture: i386 amd64 armhf
 Section: metapackages
 Priority: optional
-Depends: ${misc:Depends}, linux-image-generic-lts-saucy, linux-headers-generic-lts-saucy
+Depends: ${misc:Depends}, linux-image-generic-lts-trusty, linux-headers-generic-lts-trusty
 Description: Generic Linux kernel image and headers
  This package will always depend on the latest generic 13.10 kernel image
  and headers packages available.
 
 # Update this meta package to depend on the 14.04 LTS kernel when Saucy goes EOL.
 
-Package: linux-generic-lts-saucy-eol-upgrade
+Package: linux-generic-lts-trusty-eol-upgrade
 Architecture: i386 amd64 armhf
 Section: metapackages
 Priority: optional
-Depends: ${misc:Depends}, linux-generic-lts-saucy
+Depends: ${misc:Depends}, linux-generic-lts-trusty
 Description: Complete Generic Linux kernel and headers
  This package will always depend on the latest 13.10 generic Linux kernel
  and headers, or 14.04 when 13.10 is end of life. Refer to this page for details:
