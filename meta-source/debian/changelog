@@ -1,3 +1,9 @@
+linux-meta (3.11.0.17.18) saucy; urgency=low
+
+  * linux ABI 3.11.0-17
+
+ -- Brad Figg <brad.figg@canonical.com>  Thu, 16 Jan 2014 11:00:49 -0800
+
 linux-meta (3.11.0.16.17) saucy; urgency=low
 
   * linux ABI 3.11.0-16
