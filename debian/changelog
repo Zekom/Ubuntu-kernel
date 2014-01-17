@@ -1,3 +1,9 @@
+linux-signed (3.11.0-17.30) saucy; urgency=low
+
+  * Version 3.11.0-17.30
+
+ -- Brad Figg <brad.figg@canonical.com>  Fri, 17 Jan 2014 14:21:36 -0800
+
 linux-signed (3.11.0-17.29) saucy; urgency=low
 
   * Version 3.11.0-17.29
