@@ -1,3 +1,9 @@
+linux-signed (3.11.0-15.25) saucy; urgency=medium
+
+  * Version 3.11.0-15.25
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Fri, 31 Jan 2014 00:20:33 +0000
+
 linux-signed (3.11.0-15.23) saucy; urgency=low
 
   * Version 3.11.0-15.23
