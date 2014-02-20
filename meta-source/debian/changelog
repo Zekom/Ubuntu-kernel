@@ -1,3 +1,9 @@
+linux-meta-lts-saucy (3.11.0.18.17) precise; urgency=low
+
+  * Ubuntu-lts-3.11.0-18
+
+ -- Brad Figg <brad.figg@canonical.com>  Thu, 20 Feb 2014 09:45:46 -0800
+
 linux-meta-lts-saucy (3.11.0.17.16) precise; urgency=low
 
   * Ubuntu-lts-3.11.0-17
