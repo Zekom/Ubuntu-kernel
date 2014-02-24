@@ -945,14 +945,14 @@ EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x49049db5	rtl_cam_add_one_en
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x4b0ed83d	rtl_cam_delete_one_entry
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x4f7551b0	rtl_cam_del_entry
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x587ce659	efuse_read_1byte
+EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x5dfa352e	rtl_init_rfkill
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x7345eb52	rtl_ps_enable_nic
-EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x7a5fadbb	rtl_init_rfkill
+EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x8492c5bc	rtl_get_tcb_desc
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x99e3c9b1	rtl_efuse_shadow_map_update
-EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0x9abb1aad	rtlwifi_rate_mapping
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0xaa9946bd	rtl_usb_suspend
-EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0xc3ffda4c	rtl_get_tcb_desc
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0xccf809da	rtl_cam_reset_all_entry
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0xcffa3b91	rtl_fw_cb
+EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0xd4a6f086	rtlwifi_rate_mapping
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0xe83a33fd	rtl_ps_set_rf_state
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0xf56600e9	rtl_usb_resume
 EXPORT_SYMBOL drivers/net/wireless/rtlwifi/rtlwifi 0xfda6760e	rtl_cam_get_free_entry
