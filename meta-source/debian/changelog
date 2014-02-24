@@ -1,3 +1,9 @@
+linux-meta-ti-omap4 (3.5.0.239.39) quantal; urgency=low
+
+  * Ubuntu-3.5.0-239
+
+ -- Brad Figg <brad.figg@canonical.com>  Wed, 22 Jan 2014 15:11:40 -0800
+
 linux-meta-ti-omap4 (3.5.0.238.38) quantal; urgency=low
 
   * Ubuntu-3.5.0-238
