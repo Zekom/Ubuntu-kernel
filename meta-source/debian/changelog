@@ -1,3 +1,9 @@
+linux-meta-ti-omap4 (3.2.0.1444.42) precise; urgency=low
+
+  * linux-ti-omap4 ABI 3.2.0-1444
+
+ -- Brad Figg <brad.figg@canonical.com>  Wed, 22 Jan 2014 14:45:59 -0800
+
 linux-meta-ti-omap4 (3.2.0.1443.41) precise; urgency=low
 
   * linux-ti-omap4 ABI 3.2.0-1443
