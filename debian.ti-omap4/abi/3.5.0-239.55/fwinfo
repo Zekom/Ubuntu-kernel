@@ -166,7 +166,10 @@ firmware:       prism_ap_fw.bin
 firmware:       prism_sta_fw.bin
 firmware:       rt2870.bin
 firmware:       rt73.bin
+firmware:       rtlwifi/rtl8192cufw_A.bin
+firmware:       rtlwifi/rtl8192cufw_B.bin
 firmware:       rtlwifi/rtl8192cufw.bin
+firmware:       rtlwifi/rtl8192cufw_TMSC.bin
 firmware:       rtlwifi/rtl8712u.bin
 firmware:       sd8385.bin
 firmware:       sd8385_helper.bin
